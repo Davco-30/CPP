@@ -6,7 +6,7 @@ int main()
 {
     ///1
     ///Leer n números e imprimir lo siguiente: desplegar por pantalla una sola línea el mismo orden de los números, pero en medio
-    ///de cada uno de esos números hay que imprimir un signo demayor o menor que.
+    ///de cada uno de esos números hay que imprimir un signo de mayor o menor que.
 
     int num_frst;
 
@@ -23,11 +23,11 @@ int main()
 
     for(int i=0; i<num_frst - 1; i++){
         if(num_gp[i] < num_gp[i+1]){
-            cout << num_gp[i] << "<";
+            cout << num_gp[i] << " < ";
         }
 
         if(num_gp[i] > num_gp[i+1]){
-            cout << num_gp[i] << ">";
+            cout << num_gp[i] << " > ";
         }
     }
 

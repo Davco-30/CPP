@@ -4,7 +4,7 @@ using namespace std;
 
 int main()
 {
-    cout << "Por favor, oingrese la edad de la persona: \n" << endl;
+    cout << "Por favor, ingrese la edad de la persona: \n" << endl;
     int age;
     cin >> age;
 

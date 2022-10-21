@@ -1,0 +1,83 @@
+#include <iostream>
+
+using namespace std;
+///Combination Lock - Kattis
+
+int main()
+{
+    int a = 2000;
+    while(a > 0){
+        int init, one, two, three;
+
+        cin >> init >> one >> two >> three;
+
+        if((init + one + two + three) == 0){
+            break;
+        }
+
+        int dgr = 720;  ///1
+        //cout << "\n 1. " << dgr;
+
+        ///2
+        int one_1 = one;
+
+        if(init > one){
+            init -= one;
+            //init = 40 - init;
+            init = (init * 270)/(30);
+            dgr += init;
+        }
+
+        else if(init < one){
+            one -= init;
+            one = 40 - one;
+            one = (one * 270)/(30);
+            dgr += one;
+        }
+
+        //cout << "\n 2. " << dgr;
+
+        ///3
+        dgr += 360;
+
+        //cout << "\n 3. " << dgr;
+
+        ///4
+        int two_2 = two;
+        if(two > one_1){
+            two -= one_1;
+            //two = 40 - two;
+            two = (two * 270)/(30);
+            dgr += two;
+        }
+
+        else if(two < one_1){
+            one_1 -= two;
+            one_1 = 40 - one_1;
+            one_1 = (one_1 * 270)/(30);
+            dgr += one_1;
+        }
+
+        //cout << "\n 4. " << dgr << "\n";
+
+        ///5
+        if(three > two_2){
+            three -= two_2;
+            three = 40 - three;
+            three = (three * 270)/(30);
+            dgr += three;
+        }
+
+        else if(three < two_2){
+            two_2 -= three;
+            //two_2 = 40 - two_2;
+            two_2 = (two_2 * 270)/(30);
+            dgr += two_2;
+        }
+
+        cout << dgr << "\n";
+        a--;
+    }
+
+    return 0;
+}
