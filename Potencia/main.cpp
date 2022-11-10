@@ -5,7 +5,7 @@ using namespace std;
 int main()
 {
     ///1
-    /*
+
     int x;
     int n;
     int result = 1;
@@ -18,15 +18,14 @@ int main()
     }
 
     cout << result;
-
-    */
+    return 0;
 
     ///2
     /*
     int n;
     int result = 1;
 
-    cout << "Introduce un número y descubresu función factorial.\n";
+    cout << "Introduce un número y descubre su función factorial.\n";
     cin >> n;
 
     for(int i = 1; i <= n; i++){

@@ -1,6 +1,7 @@
 #include <iostream>
 
 using namespace std;
+//OmegaUp - KTANE
 
 int main()
 {
@@ -8,22 +9,22 @@ int main()
     int num_B;
     int num_K;
 
+    cin >> num_A >> num_B >> num_K;
 
-    cout << "Puede que hayas tenido éxito en varios modulos y hayan trabajado bien como mi equipo. Sin embargo, si su meta es salvarse de esta bomba, solamente deben desmantelar un último modulo. Para conocer más instrucciones, ingrese cualquier número.";
-    cin >> num_cont;
+    num_A -= num_B;
 
-    cout << "Se te dará una pregunta a continuación. Primero, obtendrás 3 números al azar. Con los primeros 2 número, resta el primer número con el segundo número.";
-    cout << "Después, obtén el valor absoluto de dicha resta y define si el resultado es o no menor al tercer número que hayas obtenido.";
-    cout << "Si estás listo para realizar este último modulo, ingrese cualquier número.";
+    if(num_A < 0){
+        num_A = -(num_A);
+    }
 
-    cin >> num_cont;
+    cout << num_A << "\n";
 
-    cout << num_A;
-    cout << num_B;
-    cout << num_K;
+    if(num_A >= num_K){
+        cout << "No";
+    }
 
-    cout << "¿Es la resta menor al tercer número?";
-
-    if
+    else{
+        cout << "Si";
+    }
 
 }

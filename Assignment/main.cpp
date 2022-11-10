@@ -5,7 +5,7 @@ using namespace std;
 int main()
 {
     ///1
-    ///Leer n números y después leer un número k. Imprimir un par de númers que sumen
+    ///Leer n números y después leer un número k. Imprimir un par de números que sumen
     ///exactamente k y que formen parte de los n números introducidos.
 
     int n;
@@ -23,7 +23,6 @@ int main()
     cout << "Finalmente, escribe un último número\n";
     cin >> k;
 
-    //int = sum;
 
     for(int i = 0; i < n; i++){
         //Si se quiere que no haya una suma del mismo número, inserta este for:
@@ -38,5 +37,6 @@ int main()
         }
     }
 
-    cout << "No existe una suma para obtener " << k
+    cout << "No existe una suma para obtener " << k;
+    return 0;
 }

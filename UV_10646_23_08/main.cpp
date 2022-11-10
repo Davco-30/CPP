@@ -1,6 +1,7 @@
 #include <iostream>
 
 using namespace std;
+/// p10646 - UVa
 
 int main()
 {
@@ -8,36 +9,38 @@ int main()
     cin >> n;
 
     for(int i = 0; i < n; i++){
-        string deck[52];
+        int length = 27;
+        int m = 25:
+        string pile[length];
+        string hand[m];
+
         int y = 0;
 
-        for(int i = 1; i <= 52; i++){  ///Create a deck based on the number of cases
+        for(int num = 0; num < 52; num++){
             string card;
-            deck[i] = card;
             cin >> card;
-        }
 
-        int x = 0;
-
-        for(int i = 0; i <= 2; i++){    ///Execute a 3 steps 3 times.
-
-            int card_t = deck[27-x-i];    ///Define the new top card by substracting 25 from 52
-            int x = card_t[0];          ///First value of the string is a number. If it's not, then take it as a 10
-
-            if(card_t[0] >= 2 && card_t[0] <= 9){
-                y = y + x;
+            if(num >= 27){
+                hand[num] = card;
+                break;
             }
 
-            else{
-                y = y + 10;
-            }
-
-            x = 10 - x;
-
+            pile[num] = card;
         }
 
-        cout << deck[y];
+        int steps = 3;
+        while(steps > 0){
+            int value = pile[length][0];
+            if(value >= 2 && value <= 9){
 
+            }
+        }
+
+        cout << "\n";
+
+        /*for(int num = 0; num < 52; num++){
+            cout << pile[num] << endl;
+        }*/
 
     }
 

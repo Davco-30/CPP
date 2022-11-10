@@ -4,6 +4,7 @@ using namespace std;
 
 int main()
 {
+
     ///2
     ///Se leerán n números y debes de imprimir por pantalla todos los números que no se repitan
 
@@ -62,7 +63,7 @@ int main()
         for(int j = 0; j < n_frst; j++){
 
             if(n_grp[i] == n_grp[j]){
-                    num_t = num_t + 1;
+                num_t = num_t + 1;
             }
 
         }

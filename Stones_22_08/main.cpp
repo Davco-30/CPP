@@ -1,6 +1,7 @@
 #include <iostream>
 
 using namespace std;
+///Stones on the Table - Codeforces
 
 int main()
 {

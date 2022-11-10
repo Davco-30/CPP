@@ -1,8 +1,8 @@
 #include <iostream>
 
 using namespace std;
+///Left Beehind - Kattis
 
-///Left Beehind
 int main()
 {
     int x, y;

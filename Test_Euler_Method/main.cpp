@@ -24,22 +24,23 @@ int main()
 
     cout << "y(" << n << "): " << init;*/
 
-    ///1ST Test
+    ///Problem Situation: Phase 2
+    ///R
     float n; /// y in a certain point
     cin >> n;
 
     float step = 0.01; ///step size
-    float init = 45400;  ///y
+    float init = 2500;  ///y
     float start = 0; ///x
 
     for(int i = 1; i <= (n/step); i++){
-            float derivative = 0;
+        float derivative = (1/14)*(init);
         float form = init + ((step) * (derivative));
 
         init = form;
         start += step;
 
-        cout << "y: " << init << "\n";
+        cout << "y( " << start << "): " << init << "\n";
     }
 
     cout << "y(" << n << "): " << init;

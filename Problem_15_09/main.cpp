@@ -1,6 +1,7 @@
 #include <iostream>
 
 using namespace std;
+///Odd Gnome - Kattis
 
 int main()
 {
