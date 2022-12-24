@@ -1,4 +1,5 @@
 #include <iostream>
+#include <math.h>
 using namespace std;
 ///Euler's Method
 
@@ -26,15 +27,15 @@ int main()
 
     ///Problem Situation: Phase 2
     ///R
-    float n; /// y in a certain point
-    cin >> n;
+   /* float n; /// y in a certain point
+    n = 6*/
 
-    float step = 0.01; ///step size
-    float init = 2500;  ///y
+    float step = 1; ///step size
+    float init = 10;  ///y
     float start = 0; ///x
 
-    for(int i = 1; i <= (n/step); i++){
-        float derivative = (1/14)*(init);
+    for(int i = 1; i <= (6); i++){
+        float derivative = 11 - (sqrt(13 +( 3*( (init)*(init) ) )));
         float form = init + ((step) * (derivative));
 
         init = form;
@@ -43,7 +44,7 @@ int main()
         cout << "y( " << start << "): " << init << "\n";
     }
 
-    cout << "y(" << n << "): " << init;
+    cout << "y(" << 6 << "): " << init;
 
     return 0;
 }
