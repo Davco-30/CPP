@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1672083711 source:c:\users\davco\onedrive\documents\programación\c++\problem_26_12_2022\main.cpp
+	<iostream>
+	<bits/stdc++.h>
+
+1672106178 source:c:\users\davco\onedrive\documents\programación\c++\problem_uva_10055_incomplete\main.cpp
+	<iostream>
+	<bits/stdc++.h>
+

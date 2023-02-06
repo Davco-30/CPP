@@ -5,27 +5,28 @@ using namespace std;
 
 int main()
 {
-    int n, difference;
-    int limit_1 = INT_MAX, limit_2 = INT_MIN;
+    int cases = 1;
 
-    while(cin >> n){
-        int num;
-        cin >> num;
+    while(cases <= 10){
+        int n;
+        int small = 1000001, big = -1000001;
+        cin >> n;
 
-        if(num < limit_1){
-            limit_1 = num;
+        for(int i = 0; i < n; i++){
+            int num;
+            cin >> num;
+
+            if(num < small){
+                small = num;
+            }
+
+            if(num > big){
+                big = num;
+            }
         }
 
-        if(num > limit_2){
-            limit_2 = num;
-        }
-
-        difference = limit_2 - limit_1;
-
-        cout << limit_1 << " " << limit_2 << " " << difference;
-
+        cout << "Case " << cases << ": " << small << " " << big << " " << (big-small) << endl;
+        cases++;
     }
-
-
     return 0;
 }
