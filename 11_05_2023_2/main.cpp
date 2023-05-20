@@ -14,48 +14,157 @@ node *root = NULL;
 void insert_num(int num);
 ///Crear la función find para encontrar un valor en el árbol. Función booleana
 bool find_num(int num);
+///Función: Encontrar el número o el número más cercano hacia arriba
+int lower_bound_BT(int num);
+///Función de insert_num que trabaja de forma rerusiva
+void insert_num_rec(int num, node *actual);
+///Crear nodo
+node *create_node(int num);
+///find_num recursivo.
+bool find_num_rec(int num, node *actual);
+void pre_order(node *checker);
+void in_order(node *checker);
 
 int main()
 {
-    insert_num(8);
-    insert_num(6);
-    insert_num(10);
-    insert_num(5);
-    insert_num(7);
     insert_num(9);
+    insert_num(5);
+    insert_num(3);
+    insert_num(4);
+    insert_num(2);
+    insert_num(2);
+    insert_num(1);
+    insert_num(15);
+    insert_num(12);
     insert_num(11);
+    insert_num(14);
+    insert_num(18);
+    insert_num(20);
+    insert_num(18);
 
-    find_num(8);
-    find_num(6);
-    find_num(10);
-    find_num(5);
-    find_num(7);
-    find_num(9);
-    find_num(11);
+    //pre_order(root);
+    in_order(root);
+
     return 0;
+}
+
+void in_order(node *checker){
+    if(checker->left != NULL){
+        pre_order(checker->left);
+    }
+
+    cout << checker->value << endl;
+
+    if(checker->right != NULL){
+        pre_order(checker->right);
+    }
+
+}
+
+void pre_order(node *checker){
+    cout << checker->value << endl;
+
+    if(checker->left != NULL){
+        pre_order(checker->left);
+    }
+
+    if(checker->right != NULL){
+        pre_order(checker->right);
+    }
+}
+
+node *create_node(int num){
+    node *nuevo = new node;
+    nuevo->value = num;
+    nuevo->left = NULL;
+    nuevo->right = NULL;
+
+    return nuevo;
+}
+
+bool find_num_rec(int num, node *actual){
+    if(actual == NULL){
+        return false;
+    }
+
+    if(actual->value == num){
+        return true;
+    }
+
+    else{
+        if(actual->value < num){
+            return find_num_rec(num, actual->left);
+        }
+
+        else{
+            return find_num_rec(num, actual->right);
+        }
+    }
+}
+
+void insert_num_rec(int num, node *actual){
+    if(root == NULL){
+        node *nuevo = create_node(num);
+        root = nuevo;
+    }
+
+    else{
+        if(num < actual->value){
+            if(actual->left == NULL){
+                node *nuevo = create_node(num);
+                actual->left = nuevo;
+            }
+
+            else{
+                insert_num_rec(num, actual->left);
+            }
+        }
+
+        else{
+            if(actual->right == NULL){
+                node *nuevo = create_node(num);
+                actual->right = nuevo;
+            }
+
+            else{
+                insert_num_rec(num, actual->right);
+            }
+        }
+    }
 }
 
 bool find_num(int num){
     node *checker = root;
 
-    while(checker->value != NULL){
-        if(checker->value == num){
-            cout << "value: " << checker->value << endl;
-            return true;
-        }
+    if(root == NULL){
+        return false;
+    }
 
-        else{
-            if(num < checker->value){
-                checker = checker->left;
+    else{
+        while(checker->value != NULL){
+            if(checker->value == num){
+                cout << "value: " << checker->value << endl;
+                return true;
             }
 
             else{
-                checker = checker->right;
+                if(num < checker->value && checker->left != NULL){
+                    checker = checker->left;
+                }
+
+                else if(num >= checker->value && checker->right != NULL){
+                    checker = checker->right;
+                }
+
+                else{
+                    cout << "Not found." << endl;
+                    break;
+                }
             }
         }
-    }
 
-    return false;
+        return false;
+    }
 }
 
 void insert_num(int num){
