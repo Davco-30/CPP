@@ -22,8 +22,12 @@ void insert_num_rec(int num, node *actual);
 node *create_node(int num);
 ///find_num recursivo.
 bool find_num_rec(int num, node *actual);
+///Tree traversals || Revisar
 void pre_order(node *checker);
 void in_order(node *checker);
+void post_order(node *checker);
+///Función Invertir árbol.
+void invert_tree(node *checker);
 
 int main()
 {
@@ -42,23 +46,59 @@ int main()
     insert_num(20);
     insert_num(18);
 
+    //cout << ""Pre-Order:" << endl;
     //pre_order(root);
+
+    ///Revisar
+    /*cout << "In-Order:" << endl;
     in_order(root);
+    cout << "Post-Order:" << endl;
+    post_order(root);*/
+
+    invert_tree(root);
+
+    cout << "Pre-Order:" << endl;
+    pre_order(root);
 
     return 0;
 }
 
+void invert_tree(node *checker){
+    node *left_original = checker->left;
+    checker->left = checker->right;
+    checker->right = left_original;
+
+    if(checker->left != NULL){
+        invert_tree(checker->left);
+    }
+
+    if(checker->right != NULL){
+        invert_tree(checker->right);
+    }
+}
+
 void in_order(node *checker){
     if(checker->left != NULL){
-        pre_order(checker->left);
+        in_order(checker->left);
+    }
+
+    if(checker->right != NULL){
+        in_order(checker->right);
     }
 
     cout << checker->value << endl;
+}
 
+void post_order(node *checker){
     if(checker->right != NULL){
-        pre_order(checker->right);
+        post_order(checker->right);
     }
 
+    if(checker->left != NULL){
+        post_order(checker->left);
+    }
+
+    cout << checker->value << endl;
 }
 
 void pre_order(node *checker){
