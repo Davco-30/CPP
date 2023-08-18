@@ -17,7 +17,7 @@ node *add_node(int num, node *checker);
 node *find_node(int num, node *checker);
 node *delete_node(int num, node *checker);
 node *smallest_node_right(node *checker);
-//node *biggest_node_left(node *checker);
+node *biggest_node_left(node *checker);
 void node_description(node *checker);
 
 int main()
@@ -70,7 +70,7 @@ int main()
     return 0;
 }
 
-/*node *biggest_node_left(node *checker){
+node *biggest_node_left(node *checker){
     if(checker->right != nulo){
         return biggest_node_left(checker->right);
     }
@@ -78,7 +78,7 @@ int main()
     else{
         return checker;
     }
-}*/
+}
 
 node *smallest_node_right(node *checker){
     if(checker->left != nulo){
@@ -193,7 +193,7 @@ node *find_node(int num, node *checker){
     }
 }
 
-node *add_node(int num, node *checker){
+node *add_node(int num, node *checker){     ///O(h) h:Altura del árbol, Memoria
     node *nuevo = new node;
     nuevo->value = num;
     nuevo->left = nulo;

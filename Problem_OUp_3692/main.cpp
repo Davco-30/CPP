@@ -20,15 +20,15 @@ int grid_check(int n, int m, int result){
         return result + (n*m);
     }
 
-    else if(n == m){
-        return result+1;
+    else if(n > m){
+        return grid_check(n - (m*(n/m)), m, result + (n/m));
     }
 
     else if(n < m){
-        return grid_check(n, m-n, result+(m/n));
+        return grid_check(n, m - (n*(m/n)), result + (m/n));
     }
 
-    else{
-        return grid_check(n-m, m, result+(n/m));
+    else if(n == m){
+        return result+1;
     }
 }

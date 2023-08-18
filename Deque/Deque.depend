@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1678493858 source:c:\users\davco\onedrive\documents\programación\c++\deque\main.cpp
+	<iostream>
+	<deque>
+

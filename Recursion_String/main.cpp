@@ -31,7 +31,7 @@ int main()
     return 0;
 }
 
-string recursion(string word, int n){
+string recursion(string word, int n){   ///O(n)
     cout << "word: " << word << endl;
     char letter = word[n];
     if(n >= 0){
