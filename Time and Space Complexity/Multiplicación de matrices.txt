@@ -1,0 +1,140 @@
+#include <iostream>
+
+using namespace std;
+///Multiplicación de matrices.
+
+int main()
+{
+    ///Primera matriz.
+    int rows_0, columns_0;				///Memory: 4 bytes, 4 bytes
+    cin >> rows_0 >> columns_0;
+
+    int matrix_0[rows_0][columns_0];			///Memory: rows_0 * columns_0 * (4) bytes
+
+    for(int i = 0 ; i < rows_0; i++){			///O(rows_0*columns_0)
+        for(int j = 0 ; j < columns_0; j++){
+            matrix_0[i][j] = ((rand() % 15)+5);
+        }
+    }
+
+    cout << "Matriz 0." << endl;
+
+    for(int i = 0 ; i < rows_0; i++){			///O(rows_0*columns_0)
+        for(int j = 0 ; j < columns_0; j++){
+            cout << matrix_0[i][j] << " ";
+        }
+        cout << endl;
+    }
+
+    cout << endl;
+
+    ///Matriz multiplicadora
+    int rows_m, cols_m;					///Memory: 4 bytes, 4 bytes
+    cin >> rows_m >> cols_m;
+
+    int flag = 0;					///Memory: 4 bytes
+
+    if(columns_0 != rows_m){
+        if(cols_m != rows_0){
+            flag = -1;
+        }
+
+        else{
+            cout << "CASO 2.\n" << endl;
+            flag = 2;
+        }
+    }
+
+    else{
+        cout << "CASO 1.\n" << endl;
+        flag = 1;
+    }
+
+    if(flag == -1){
+        cout << "No hay solución." << endl;
+    }
+
+    else{
+        int matrix_m[rows_m][cols_m];			///Memory: 4 bytes
+
+        for(int i = 0 ; i < rows_m; i++){			///O(rows_m*cols_m)
+            for(int j = 0 ; j < cols_m; j++){
+                matrix_m[i][j] = ((rand() % 15)+5)/(2)+7;
+            }
+        }
+
+        cout << "Matriz multiplicadora." << endl;
+
+        for(int i = 0 ; i < rows_m; i++){			///O(rows_m*cols_m)
+            for(int j = 0 ; j < cols_m; j++){
+                cout << matrix_m[i][j] << " ";
+            }
+
+            cout << endl;
+        }
+
+        cout << endl;
+
+        if(flag == 1){
+            ///Matriz resultado (Caso 1).
+            int matrix_final_1[rows_0][cols_m];			///Memory: rows_0*cols_m* (4) bytes
+
+            for(int i = 0; i < rows_0; i++){			///O(rows_0*cols_m*rows_m) => O(n^3)
+                for(int j = 0; j < cols_m; j++){
+                    matrix_final_1[i][j] = 0;
+
+                    for(int k = 0; k < rows_m; k++){
+                        matrix_final_1[i][j] += matrix_0[i][k] * matrix_m[k][j];
+
+                        //cout << "°M0: " << matrix_0[i][k] << "\t°Mm: " << matrix_m[k][j] << "\n";
+                    }
+
+                    /*cout << "\tR: " << matrix_final_1[i][j] << endl;
+                    cout << endl;*/
+                }
+            }
+
+            cout << "Matriz resultado.\n";
+            for(int i = 0; i < rows_0; i++){			///O(rows_0*cols_m)
+                for(int j = 0; j < cols_m; j++){
+                    cout << matrix_final_1[i][j] << " ";
+                }
+
+                cout << endl;
+            }
+
+
+        }
+
+        else{
+            ///Matriz resultado (Caso 2).
+            int matrix_final_2[rows_m][columns_0];
+
+            for(int i = 0; i < rows_m; i++){
+                for(int j = 0; j < columns_0; j++){
+                    matrix_final_2[i][j] = 0;
+
+                    for(int k = 0; k < rows_0; k++){
+                        matrix_final_2[i][j] += matrix_m[i][k] * matrix_0[k][j];
+
+                        //cout << "°M0: " << matrix_0[k][j] << "\t°Mm: " << matrix_m[i][k] << "\n";
+                    }
+
+                    /*cout << "\tR: " << matrix_final_2[i][j] << endl;
+                    cout << endl;*/
+                }
+            }
+
+            cout << "Matriz resultado.\n";
+            for(int i = 0; i < rows_m; i++){
+                for(int j = 0; j < columns_0; j++){
+                    cout << matrix_final_2[i][j] << " ";
+                }
+
+                cout << endl;
+            }
+        }
+    }
+
+    return 0;
+}

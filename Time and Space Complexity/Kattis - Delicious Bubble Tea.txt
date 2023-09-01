@@ -1,0 +1,70 @@
+#include <iostream>
+using namespace std;
+
+///Delicious_Bubble_Tea - Kattis
+///Liga: https://open.kattis.com/problems/bubbletea?tab=submissions
+
+int main()
+{
+    int n, m; //Teas amount  //toppings amount		///Memory: 4 bytes*2
+    int buy = 1000000000; //What should i buy?		///Memory: 4 bytes
+
+    cin >> n;
+    int teas[n];					///Memory: 4 bytes
+
+    ///Teas
+    for(int i = 0; i < n; i++){				///O(n), Worst Case O(1000)
+        cin >> teas[i];
+    }
+
+    cin >> m;
+    int tops[m];					///Memory: 4 bytes
+
+    ///Toppings
+    for(int i = 0; i < m; i++){				///O(m), Worst case O(1000) 
+        cin >> tops[i];
+    }
+
+    ///Toppings for each tea
+    for(int i = 0; i < n; i++){				///O(n*m), Worst case O(10^6) 
+       
+	int cheap = 1000000000;				///Memory: 4 bytes
+        int num;					///Memory: 4 bytes
+        cin >> num; ///Topping per tea
+
+        for(int k = 0; k < num; k++){
+            int top;					///Memory: 4 bytes
+            cin >> top;
+
+            if(tops[top-1] < cheap){
+                cheap = tops[top-1];
+            }
+        }
+
+        //cout << "\ncheapest top of the tea "<< teas[i] << " : " << cheap << ".\n";
+        //cout << "cheapest combination: " << cheap + teas[i] << ".\n";
+
+        if( (cheap + teas[i]) < buy){
+            buy = cheap + teas[i];
+        }
+
+        //cout << "buy: " << buy << ".\n";
+    }
+
+    int money;						///Memory: 4 bytes
+    cin >> money;
+
+    money /= buy;
+
+    money--;
+
+    if(money <= 0){
+        cout << 0;
+    }
+
+    else{
+        cout << money;
+    }
+
+    return 0;
+}

@@ -1,0 +1,278 @@
+#include <iostream>
+
+using namespace std;
+
+class node{
+public:
+    int value;          ///Memory 4 Bytes
+    node *left;         ///Memory: 8 Bytes
+    node *right;        ///Memory: 8 Bytes
+    node *father;       ///Memory: 8 Bytes
+};
+
+node *nulo = NULL;      ///Memory: 8 Bytes
+node *root = nulo;      ///Memory: 8 Bytes
+
+node *add_node(int num, node *checker);
+node *find_node(int num, node *checker);
+node *delete_node(int num, node *checker);
+node *smallest_node_right(node *checker);
+node *biggest_node_left(node *checker);
+void node_description(node *checker);
+
+int main()
+{
+    int input;      ///Memory: 4 Bytes
+    while(true){
+        cout << "- Menú\n";
+        cout << "1. Agregar un nodo." << endl;
+        cout << "2. Buscar un nodo." << endl;
+        cout << "3. Eliminar un nodo." << endl;
+        cout << "0. Salir" << endl;
+
+        cout << "\nRespuesta: ";
+        cin >> input;
+        cout << endl;
+
+        if(input == 1){             ///O(C), C = Constant
+            cout << "OPCIÓN 1.\nIngresa el valor del nodo." << endl;
+
+            int number;
+            cin >> number;
+            add_node(number, root);
+        }
+
+        else if(input == 2){        ///O(C), C = Constant
+            cout << "OPCIÓN 2.\nIngresa el valor del nodo." << endl;
+
+            int number;
+            cin >> number;
+            find_node(number, root);
+        }
+
+        else if(input == 3){        ///O(C), C = Constant
+            cout << "OPCIÓN 3.\nIngresa el valor del nodo." << endl;
+
+            int number;
+            cin >> number;
+            cout << delete_node(number, root) << endl;
+        }
+
+        else if(input == 0){        ///O(C), C = Constant
+            cout << "SALISTE" << endl;
+            break;
+        }
+
+        else{                       ///O(C), C = Constant
+            cout << "NO VALIDO.\n" << endl;
+        }
+    }
+    return 0;
+}
+
+node *biggest_node_left(node *checker){
+    if(checker->right != nulo){
+        return biggest_node_left(checker->right);
+    }
+
+    else{
+        return checker;
+    }
+}
+
+node *smallest_node_right(node *checker){
+    if(checker->left != nulo){
+        return smallest_node_right(checker->left);
+    }
+
+    else{
+        return checker;
+    }
+}
+
+node *delete_node(int num, node *checker){///O(h) h:Altura del árbol
+    if(checker == nulo){                              ///O(C), C = Constant
+        return nulo;
+    }
+
+    if(num < checker->value){                              ///O(C), C = Constant
+        return delete_node(num, checker->left);
+    }
+
+    if(num > checker->value){                              ///O(C), C = Constant
+        return delete_node(num, checker->right);
+    }
+
+    if(num == checker->value){                              ///O(C), C = Constant
+        if(checker->left == nulo && checker->right == nulo){                              ///O(C), C = Constant
+            node *parent = checker->father;                         ///Memory: 8 Bytes
+
+            if(checker == parent->right){                              ///O(C), C = Constant
+                parent->right = nulo;
+            }
+
+            else if(checker == parent->left){                              ///O(C), C = Constant
+                parent->left = nulo;
+            }
+
+            cout << "1. ELIMINADO.\n" << endl;
+            return nulo;
+        }
+
+        else if(checker->left != nulo && checker->right == nulo){                              ///O(C), C = Constant
+            node *parent = checker->father;         ///Memory: 8 Bytes
+            node *new_son = checker->left;          ///Memory: 8 Bytes
+
+            if(checker == parent->right){
+                parent->right = checker->left;
+            }
+
+            else if(checker == parent->left){
+                parent->left = checker->left;
+            }
+
+            (checker->left)->father = parent;
+            checker->father = nulo;
+
+            cout << "2A. ELIMINADO.\n" << endl;
+            return new_son;
+        }
+
+        else if(checker->left == nulo && checker->right != nulo){                              ///O(C), C = Constant
+            node *parent = checker->father;     ///Memory: 8 Bytes
+            node *new_son = checker->right;     ///Memory: 8 Bytes
+
+            if(checker == parent->right){
+                parent->right = checker->right;
+            }
+
+            else if(checker == parent->left){
+                parent->left = checker->right;
+            }
+
+            (checker->right)->father = parent;
+            checker->father = nulo;
+
+            cout << "2B. ELIMINADO.\n" << endl;
+            return new_son;
+        }
+
+        else if(checker->left != nulo && checker->right != nulo){
+            node *replacement = smallest_node_right(checker->right);        ///Memory: 8 Bytes
+
+            int new_num = replacement->value;       ///Memory: 4 Bytes
+
+            replacement->value = checker->value;
+            checker->value = new_num;
+
+            cout << "REEMPLAZO REQUERIDO.\n" << endl;
+            delete_node(num, replacement);
+        }
+    }
+}
+
+node *find_node(int num, node *checker){///Worst Case => O(h) h:Altura del árbol
+    if(checker == nulo){                              ///O(C), C = Constant
+        cout << "NO EXISTE.\n" << endl;
+        return nulo;
+    }
+
+    if(checker->value == num){                              ///O(C), C = Constant
+        cout << "ENCONTRADO.\n" << endl;
+        node_description(checker);
+
+        return checker;
+    }
+
+    if(num < checker->value){                              ///O(C), C = Constant
+        return find_node(num, checker->left);
+    }
+
+    if(num > checker->value){                              ///O(C), C = Constant
+        return find_node(num, checker->right);
+    }
+}
+
+node *add_node(int num, node *checker){     ///Worst case: O(h) , Best case: O(log(h)), h:Altura del árbol
+    node *nuevo = new node;                 ///Memory: 8 Bytes
+    nuevo->value = num;
+    nuevo->left = nulo;
+    nuevo->right = nulo;
+
+    if(root == nulo){                   ///O(C), C = Constant
+        cout << "NODO Y RAÍZ AGREGADA.\n" << endl;
+        root = nuevo;
+        root->father = nulo;
+    }
+
+    else{                              ///O(C), C = Constant
+        if(num < checker->value){              ///O(C), C = Constant
+            if(checker->left == nulo){         ///O(C), C = Constant
+                cout << "NODO AGREGADO.\n" << endl;
+                checker->left = nuevo;
+                nuevo->father = checker;
+                return nuevo;
+            }
+
+            else{                              ///O(C), C = Constant
+                return add_node(num, checker->left); ///Worst case: O(n)
+            }
+        }
+
+        else{                              ///O(C), C = Constant
+            if(checker->right == nulo){                              ///O(C), C = Constant
+                cout << "NODO AGREGADO.\n" << endl;
+                checker->right = nuevo;
+                nuevo->father = checker;
+                return nuevo;
+            }
+
+            else{                                                   ///O(C), C = Constant
+                return add_node(num, checker->right);
+            }
+        }
+    }
+}
+
+void node_description(node *checker){
+    cout << "CARACTERÍSTICAS DE ";
+
+    if(checker == root){                ///O(C), C = Constant
+        cout << "LA RAÍZ DEL ÁRBOL:" << endl;
+    }
+
+    else{                               ///O(C), C = Constant
+        cout << "NODO:" << endl;
+    }
+
+    cout << "+ Valor: " << checker->value << endl;
+    cout << "+ Hijo derecho: ";
+
+    if(checker->right == nulo){         ///O(C), C = Constant
+        cout << "NULO." << endl;
+    }
+
+    else{                               ///O(C), C = Constant
+        cout << checker->right->value << endl;
+    }
+
+    cout << "+ Hijo izquierdo: ";
+
+    if(checker->left == nulo){          ///O(C), C = Constant
+        cout << "NULO." << endl;
+    }
+
+    else{                              ///O(C), C = Constant
+        cout << checker->left->value << endl;
+    }
+
+    cout << "+ Padre del nodo: ";
+
+    if(checker->father == nulo){       ///O(C), C = Constant
+        cout << "NULO." << "\n" << endl;
+    }
+
+    else{                              ///O(C), C = Constant
+        cout << checker->father->value << "\n" << endl;
+    }
+}

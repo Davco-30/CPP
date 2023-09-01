@@ -1,0 +1,57 @@
+#include <iostream>
+
+using namespace std;
+///Omega Up - 1460. Las Cuentas del Hippie
+///Liga: https://omegaup.com/arena/problem/cuentas/
+
+int main()
+{
+    int k, n;    			///Memory: 4 bytes * 2
+    cin >> k >> n;
+
+    int collar[2*n];			///Memory: 4 bytes
+
+    for(int i = 0; i < n; i++){		///O(N), Worst case O(30,000) - O(3*10^4)
+        cin >> collar[i];
+        collar[n+i] = collar[i];
+    }
+
+    int right = 0, left = 0;
+    int sum = n;
+    int sum2 = 0, sum_1 = 0;
+
+    while( right < (2*n) ){		///O(2*N) => O(n), Worst case O(30,000) - O(3*10^4)
+
+        if(sum2 < k){
+            if( collar[right] == 0){
+                sum2++;
+            }
+
+            else if( collar[right] == 1){
+                sum_1++;
+            }
+
+            right++;
+        }
+
+        else{
+            if( (sum_1) < sum){
+                sum = sum_1;
+            }
+
+            if(collar[left] == 0){
+                sum2--;
+            }
+
+            else if(collar[left] == 1){
+                sum_1--;
+            }
+
+            left++;
+        }
+    }
+
+    cout << sum;
+
+    return 0;
+}

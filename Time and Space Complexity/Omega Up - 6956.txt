@@ -1,0 +1,37 @@
+#include <iostream>
+
+using namespace std;
+///OmegaUp - 6956. Paseo de la Reforma
+///Liga: https://omegaup.com/arena/problem/OMI2018-Reforma/
+
+int main()
+{
+    int n;				///Memory: 4 bytes
+    cin >> n;
+
+    int list1[n];			///Memory: 4 bytes
+
+    for(int i = 0; i < n; i++){		///O(n), Worst case O(10^5) 
+        cin >> list1[i];
+    }
+
+    int result = 0;
+    int countr = 1;
+
+    for(int i = 0; i < n-1; i++){	///O(n-1) -> O(n), Worst case O(10^5) 
+        if(list1[i] > list1[i+1]){
+            countr++;
+        }
+
+        if(list1[i] <= list1[i+1] || i == n-2){
+            if(countr > result){
+                result = countr;
+            }
+            countr = 1;
+        }
+    }
+
+    cout << result;
+
+    return 0;
+}

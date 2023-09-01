@@ -1,0 +1,42 @@
+#include <iostream>
+
+using namespace std;
+///Codeforces - A. IQ test
+///Liga: https://codeforces.com/problemset/problem/25/A
+
+int main()
+{
+    int n;						///Memory: 4 bytes			
+    int even = 0, index_ev = 0, index_odd = 0;		///Memory: 4 bytes*3
+    cin >> n;
+
+    for(int i = 1; i <= n; i++){		///O(n), Worst case: O(100)
+        int num;				///Memory: 4 bytes
+        cin >> num;
+
+        if(num%2 == 0){
+            even++;
+
+            if(index_ev == 0){
+                index_ev = i;
+            }
+        }
+
+        else{
+            if(index_odd == 0){
+                index_odd = i;
+            }
+        }
+
+    }
+
+    if(even == 1){
+        cout << index_ev;
+    }
+
+    else{
+        cout << index_odd;
+    }
+
+    return 0;
+}
